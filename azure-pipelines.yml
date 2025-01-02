@@ -2,10 +2,14 @@ trigger:
 - main
 
 pool:
-  name: 'notagent'  # Your self-hosted agent pool name
+  name: 'notagent'  # Use your self-hosted agent pool name
 
 steps:
+# Step to checkout code from GitHub
+- checkout: self  # This ensures the code is pulled from the repository
+
+# Step to run the PowerShell script
 - task: PowerShell@2
   inputs:
     targetType: 'filePath'
-    filePath: './scripts/my_script.ps1'  # Path to your PowerShell script
+    filePath: '$(Build.SourcesDirectory)/scripts/my_script.ps1'
